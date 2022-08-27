@@ -1,17 +1,13 @@
 #modules
 import pygame
 from random import randint
-# musica de fundo
-# definição de musica de fundo
-default = 'settings/music/default.mp3'
 
-#default volume
-sound = 0.50
-
-def songs(sound=sound, music=default):
-    pygame.mixer.music.set_volume(sound)
+def start_songs(music):
     music_background = pygame.mixer.music.load(music)
     pygame.mixer.music.play(-1)
+
+def songs_volume(sound):
+    pygame.mixer.music.set_volume(sound)
 
 #função de evolução da cobra
 def snake_evolution( p, display ):
@@ -20,6 +16,7 @@ def snake_evolution( p, display ):
 
 def clear(props):
     del props
+
 
 
 
