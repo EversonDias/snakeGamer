@@ -8,6 +8,7 @@ class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
         self.direction = Vector2(0, 0)
+        self.new_block = False
 
         self.head_up = pygame.image.load('settings/img/head_up.png').convert_alpha()
         self.head_down = pygame.image.load('settings/img/head_down.png').convert_alpha()
@@ -73,14 +74,18 @@ class SNAKE:
         elif tail_relation == Vector2(0, -1): self.tail = self.tail_down
 
     def move_snake(self):
-        body_copy = self.body[:-1]
-        body_copy.insert(0, body_copy[0] + self.direction)
-        self.body = body_copy[:]
+        if self.new_block:
+            body_copy = self.body[:]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy[:]
+            self.new_block = False
+        else:
+            body_copy = self.body[:-1]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy[:]
 
     def add_block(self):
-        body_copy = self.body[:]
-        body_copy.insert(0, body_copy[0] + self.direction)
-        self.body = body_copy[:]
+        self.new_block = True
 
     def play_eat_sound(self):
         self.eat_sound.play()
